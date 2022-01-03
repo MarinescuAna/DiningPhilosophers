@@ -9,7 +9,7 @@ namespace DiningPhilosophers
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Press: \n1 -> [strategy 1] \n2 -> [strategy2] ");
+            Console.WriteLine("Press: \n1 -> [strategy 1] \n2 -> [strategy 2] \n3 -> [strategy 3]");
             var readed = Console.ReadLine();
             var philosophersNumber = 0;
 
@@ -28,12 +28,19 @@ namespace DiningPhilosophers
                     Console.WriteLine("\n_______________________\nWrite the number of philosophers:");
                     philosophersNumber = int.Parse(Console.ReadLine());
 
-                    Console.WriteLine("\nWrite the number of uses:");
+                    Console.WriteLine("\nWrite the number of eating times:");
                     var eatingTimes = int.Parse(Console.ReadLine());
 
                     new SecondStrategy(philosophersNumber, eatingTimes).Main();
                     break;
-                default:
+                case "3":
+                    Console.WriteLine("\n_______________________\nWrite the number of philosophers:");
+                    philosophersNumber = int.Parse(Console.ReadLine());
+
+                    Console.WriteLine("\nWrite the number of thinking times:");
+                    var thinkingTimes = int.Parse(Console.ReadLine());
+
+                    new SecondStrategy(philosophersNumber, thinkingTimes).Main();
                     break;
             }
 

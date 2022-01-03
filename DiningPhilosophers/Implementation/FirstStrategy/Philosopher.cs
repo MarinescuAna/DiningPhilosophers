@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DiningPhilosophers.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,18 +13,18 @@ namespace DiningPhilosophers.Implementation.FirstStrategy
         public string Name { get; private set; }
         public Philosopher(int index)
         {
-            Name = $"Philosopher {index}";
+            Name = string.Format(Constants.Philosopher, index);
         }
 
         public bool Eat()
         {
             if (Chopsticks.Count() == 2)
             {
-                Console.WriteLine($"{Name} is eating with {Chopsticks[0].Name} and {Chopsticks[1].Name}.");
+                Console.WriteLine(StringConstants.PhilosopherIsEating, Name, Chopsticks[0].Name, Chopsticks[1].Name);
 
-                Thread.Sleep(2000);
+                Thread.Sleep(new Random().Next(2000, 2500));
 
-                Console.WriteLine($"{Name} is back to thinking.");
+                Console.WriteLine(StringConstants.PhilosopherIsBackToThinking, Name);
 
                 return true;
             }

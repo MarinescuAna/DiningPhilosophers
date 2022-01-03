@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DiningPhilosophers.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,19 +12,19 @@ namespace DiningPhilosophers.Implementation.FirstStrategy
         private Philosopher _leftPhilosopher;
         private Philosopher _rightPhilosopher;
         private Semaphore _semaphore = new Semaphore(1, 1);
-        private int counter = 0;
+        private int _counter = 0;
         public string Name { get; private set; }
         public Chopstick(int index, Philosopher leftPhilosopher, Philosopher rightPhilosopher, int numberOfUses)
         {
-            counter = numberOfUses;
-            Name = $"Chopstick {index}";
+            _counter = numberOfUses;
+            Name = string.Format(Constants.Chopstick, index);
             _leftPhilosopher = leftPhilosopher;
             _rightPhilosopher = rightPhilosopher;
         }
 
         public void Run()
         {
-            while (counter != 0)
+            while (_counter != 0)
             {
                 if (new Random().Next() % 2 == 0)
                 {
@@ -33,7 +34,7 @@ namespace DiningPhilosophers.Implementation.FirstStrategy
                 {
                     GoToRightPhilosopher();
                 }
-                counter--;
+                _counter--;
             }
         }
         private void GoToRightPhilosopher()
@@ -42,7 +43,7 @@ namespace DiningPhilosophers.Implementation.FirstStrategy
             {
                 _semaphore.WaitOne();
 
-                Console.WriteLine($"{Name} go to {_rightPhilosopher.Name} (right).");
+                Console.WriteLine(StringConstants.PhilosopherHasChopstickInRightHand, Name, _rightPhilosopher.Name);
 
                 _rightPhilosopher.Chopsticks.Add(this);
 
@@ -59,7 +60,7 @@ namespace DiningPhilosophers.Implementation.FirstStrategy
         {
             _rightPhilosopher.Chopsticks.Remove(this);
 
-            Console.WriteLine($"{Name} get back on the table.");
+            Console.WriteLine(StringConstants.ChopstickOnTheTable, Name, _counter - 1);
 
             _semaphore.Release();
         }
@@ -69,7 +70,7 @@ namespace DiningPhilosophers.Implementation.FirstStrategy
             {
                 _semaphore.WaitOne();
 
-                Console.WriteLine($"{Name} go to {_leftPhilosopher.Name} (left).");
+                Console.WriteLine(StringConstants.PhilosopherHasChopstickInLeftHand, Name, _leftPhilosopher.Name);
 
                 _leftPhilosopher.Chopsticks.Add(this);
 
