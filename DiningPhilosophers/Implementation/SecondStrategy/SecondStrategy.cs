@@ -16,11 +16,16 @@ namespace DiningPhilosophers.Implementation.SecondStrategy
             var philosophers = new List<Philosopher>(_max);
             for (int i = 0; i < _max; i++)
             {
-                philosophers.Add(new Philosopher(i,_maxEatingTimes));
+                philosophers.Add(new Philosopher(philosophers,i,_maxEatingTimes));
             }
 
-            // Start dinner
-            Console.WriteLine(Constants.DinnerIsStart);
+            philosophers.ForEach(philosopher => {
+                // Assign left chopstick
+                philosopher.LeftChopstick = philosopher.LeftPhilosopher.RightChopstick ?? new Chopstick();
+
+                // Assign right chopstick
+                philosopher.RightChopstick = philosopher.RightPhilosopher.LeftChopstick ?? new Chopstick();
+            });
 
             // Spawn threads for each philosopher's eating cycle
             var philosopherThreads = new List<Thread>();
@@ -31,14 +36,9 @@ namespace DiningPhilosophers.Implementation.SecondStrategy
                 philosopherThread.Start();
             }
 
-            // Wait for all philosopher's to finish eating
-            foreach (var thread in philosopherThreads)
-            {
+            philosopherThreads.ForEach(thread => {
                 thread.Join();
-            }
-
-            // Done
-            Console.WriteLine(Constants.DinnerIsOver);
+            });
         }
     }
 }

@@ -16,7 +16,7 @@ namespace DiningPhilosophers.Implementation.ThirdStrategy
         public Philosopher(int index, BunchOfChopsticks chopsticks, int timesToEating)
         {
             _timesToEat = timesToEating;
-            _name = string.Format(Constants.Philosopher,index);
+            _name = string.Format(Constants.Philosopher, index);
             _thinkDelay = RandomWaitingTime.WaitingTime;
             _eatDelay = RandomWaitingTime.WaitingTime;
             _chopsticks = chopsticks;

@@ -14,7 +14,7 @@ namespace DiningPhilosophers.Implementation.ThirdStrategy
         public void Init(int numberOfChopsticks)
         {
             Enumerable.Range(0, numberOfChopsticks).ToList().ForEach(index => {
-                _chopsticks.Add((string.Format(Constants.Chopstick,index+1), false));
+                _chopsticks.Add((string.Format(Constants.Chopstick, index + 1), false));
             });
         }
         public void Get(ref int chopstick1, ref int chopstick2, string philosopherName)

@@ -4,13 +4,7 @@ using System.Text;
 
 namespace DiningPhilosophers.Implementation.ThirdStrategy
 {
-    public static class RandomWaitingTime
-    {
-        public static int WaitingTime
-        {
-            get => new Random().Next(1000, 5000);
-        }
-    }
+  
     public static class StringsForThirdStrategy
     {
         public static readonly string PickUpChopstick = "{0} picks up {1} and {2}. [{3}s]";
