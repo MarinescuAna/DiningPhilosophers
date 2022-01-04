@@ -17,12 +17,9 @@ namespace DiningPhilosophers.Implementation.FirstStrategy
         public FirstStrategy(int max, int numberOfUses) : base(max)
                 => _numberOfUses = numberOfUses;
                
-        
         public override void Main()
         {
             Init();
-
-            Console.WriteLine(Constants.DinnerIsStart);
 
             Enumerable.Range(0, _max).ToList().ForEach(index =>
             {
@@ -30,13 +27,6 @@ namespace DiningPhilosophers.Implementation.FirstStrategy
                 _chopsticksThreads.Add(thread);
                 thread.Start();
             });
-
-            Enumerable.Range(0, _max).ToList().ForEach(index =>
-            {
-                _chopsticksThreads[index].Join();
-            });
-
-            Console.WriteLine(Constants.DinnerIsOver);
         }
         private void Init()
         {

@@ -1,6 +1,8 @@
 ﻿using DiningPhilosophers.Abstraction;
+using DiningPhilosophers.Common;
 using DiningPhilosophers.Implementation.FirstStrategy;
 using DiningPhilosophers.Implementation.SecondStrategy;
+using DiningPhilosophers.Implementation.ThirdStrategy;
 using System;
 
 namespace DiningPhilosophers
@@ -9,14 +11,14 @@ namespace DiningPhilosophers
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Press: \n1 -> [strategy 1] \n2 -> [strategy 2] \n3 -> [strategy 3]");
+            Console.WriteLine(Constants.MenuOptions);
             var readed = Console.ReadLine();
             var philosophersNumber = 0;
 
             switch (readed)
             {
                 case "1":
-                    Console.WriteLine("\n_______________________\nWrite the number of philosophers:");
+                    Console.WriteLine(Constants.NumberOfPhilosophers);
                     philosophersNumber = int.Parse(Console.ReadLine());
 
                     Console.WriteLine("\nWrite the number of uses:");
@@ -25,22 +27,22 @@ namespace DiningPhilosophers
                     new FirstStrategy(philosophersNumber, numberOfUses).Main();
                     break;
                 case "2":
-                    Console.WriteLine("\n_______________________\nWrite the number of philosophers:");
+                    Console.WriteLine(Constants.NumberOfPhilosophers);
                     philosophersNumber = int.Parse(Console.ReadLine());
 
-                    Console.WriteLine("\nWrite the number of eating times:");
+                    Console.WriteLine(Constants.NumberOfEatingTimes);
                     var eatingTimes = int.Parse(Console.ReadLine());
 
                     new SecondStrategy(philosophersNumber, eatingTimes).Main();
                     break;
                 case "3":
-                    Console.WriteLine("\n_______________________\nWrite the number of philosophers:");
+                    Console.WriteLine(Constants.NumberOfPhilosophers);
                     philosophersNumber = int.Parse(Console.ReadLine());
 
-                    Console.WriteLine("\nWrite the number of thinking times:");
-                    var thinkingTimes = int.Parse(Console.ReadLine());
+                    Console.WriteLine(Constants.NumberOfEatingTimes);
+                    var eatTimes = int.Parse(Console.ReadLine());
 
-                    new SecondStrategy(philosophersNumber, thinkingTimes).Main();
+                    new ThirdStrategy(philosophersNumber, eatTimes).Main();
                     break;
             }
 

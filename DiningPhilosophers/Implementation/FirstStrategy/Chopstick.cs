@@ -43,13 +43,13 @@ namespace DiningPhilosophers.Implementation.FirstStrategy
             {
                 _semaphore.WaitOne();
 
-                Console.WriteLine(StringConstants.PhilosopherHasChopstickInRightHand, Name, _rightPhilosopher.Name);
+                Console.WriteLine(StringsForFirstStrategy.PhilosopherHasChopstickInRightHand, Name, _rightPhilosopher.Name);
 
                 _rightPhilosopher.Chopsticks.Add(this);
 
                 while (!_rightPhilosopher.Eat())
                 {
-                    Thread.Sleep(100);
+                    Thread.Sleep(WaitingTime.WaitingLessTimeProperty);
                 }
 
                 PutOnTheTable();
@@ -60,7 +60,7 @@ namespace DiningPhilosophers.Implementation.FirstStrategy
         {
             _rightPhilosopher.Chopsticks.Remove(this);
 
-            Console.WriteLine(StringConstants.ChopstickOnTheTable, Name, _counter - 1);
+            Console.WriteLine(StringsForFirstStrategy.ChopstickOnTheTable, Name);
 
             _semaphore.Release();
         }
@@ -70,13 +70,13 @@ namespace DiningPhilosophers.Implementation.FirstStrategy
             {
                 _semaphore.WaitOne();
 
-                Console.WriteLine(StringConstants.PhilosopherHasChopstickInLeftHand, Name, _leftPhilosopher.Name);
+                Console.WriteLine(StringsForFirstStrategy.PhilosopherHasChopstickInLeftHand, Name, _leftPhilosopher.Name);
 
                 _leftPhilosopher.Chopsticks.Add(this);
 
                 while (!_leftPhilosopher.Eat())
                 {
-                    Thread.Sleep(100);
+                    Thread.Sleep(WaitingTime.WaitingLessTimeProperty);
                 }
 
                 PutOnTheTable();

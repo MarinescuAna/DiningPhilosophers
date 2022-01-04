@@ -11,6 +11,8 @@ namespace DiningPhilosophers.Implementation.FirstStrategy
     {
         public List<Chopstick> Chopsticks = new List<Chopstick>(2);
         public string Name { get; private set; }
+        private bool _isEating = false;
+
         public Philosopher(int index)
         {
             Name = string.Format(Constants.Philosopher, index);
@@ -20,16 +22,24 @@ namespace DiningPhilosophers.Implementation.FirstStrategy
         {
             if (Chopsticks.Count() == 2)
             {
-                Console.WriteLine(StringConstants.PhilosopherIsEating, Name, Chopsticks[0].Name, Chopsticks[1].Name);
+                if (!_isEating)
+                {
+                    _isEating = true;
+                    Console.WriteLine(StringsForFirstStrategy.PhilosopherIsEating, Name, Chopsticks[0].Name, Chopsticks[1].Name);
 
-                Thread.Sleep(new Random().Next(2000, 2500));
+                    Thread.Sleep(WaitingTime.WaitingTimeProperty);
 
-                Console.WriteLine(StringConstants.PhilosopherIsBackToThinking, Name);
+                    Console.WriteLine(StringsForFirstStrategy.PhilosopherIsBackToThinking, Name);
+
+                    Thread.Sleep(WaitingTime.WaitingTimeProperty);
+                }
 
                 return true;
             }
 
+            _isEating = false;
             return false;
         }
     }
+
 }
