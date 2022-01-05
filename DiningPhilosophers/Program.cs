@@ -24,7 +24,10 @@ namespace DiningPhilosophers
                     Console.WriteLine(Constants.NumberOfUses);
                     var numberOfUses = int.Parse(Console.ReadLine());
 
-                    new FirstStrategy(philosophersNumber, numberOfUses).Main();
+                    Console.WriteLine(Constants.WaitingTime);
+                    var waitingTime = int.Parse(Console.ReadLine());
+
+                    new FirstStrategy(philosophersNumber, numberOfUses,waitingTime).Main();
                     break;
                 case "2":
                     Console.WriteLine(Constants.NumberOfPhilosophers);

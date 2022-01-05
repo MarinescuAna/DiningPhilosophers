@@ -13,9 +13,11 @@ namespace DiningPhilosophers.Implementation.FirstStrategy
         private Philosopher _rightPhilosopher;
         private Semaphore _semaphore = new Semaphore(1, 1);
         private int _counter = 0;
+        private int _waitingTime = 0;
         public string Name { get; private set; }
-        public Chopstick(int index, Philosopher leftPhilosopher, Philosopher rightPhilosopher, int numberOfUses)
+        public Chopstick(int index, Philosopher leftPhilosopher, Philosopher rightPhilosopher, int numberOfUses, int watingtime)
         {
+            _waitingTime = watingtime;
             _counter = numberOfUses;
             Name = string.Format(Constants.Chopstick, index);
             _leftPhilosopher = leftPhilosopher;
@@ -28,59 +30,40 @@ namespace DiningPhilosophers.Implementation.FirstStrategy
             {
                 if (new Random().Next() % 2 == 0)
                 {
-                    GoToLeftPhilosopher();
+                    GoToPhilosopher(_leftPhilosopher);
                 }
                 else
                 {
-                    GoToRightPhilosopher();
+                    GoToPhilosopher(_rightPhilosopher);
                 }
                 _counter--;
             }
         }
-        private void GoToRightPhilosopher()
+        private void GoToPhilosopher(Philosopher philosopher)
         {
-            if (_rightPhilosopher.Chopsticks.Count() != 2)
+
+            if (philosopher.Chopsticks.Count() != 2)
             {
                 _semaphore.WaitOne();
 
-                Console.WriteLine(StringsForFirstStrategy.PhilosopherHasChopstickInRightHand, Name, _rightPhilosopher.Name);
+                Console.WriteLine(StringsForFirstStrategy.PhilosopherHasChopstickInRightHand, Name, philosopher.Name);
 
-                _rightPhilosopher.Chopsticks.Add(this);
+                philosopher.Chopsticks.Add(this);
 
-                while (!_rightPhilosopher.Eat())
+                var waitingTime = _waitingTime;
+                while (!philosopher.Eat() && waitingTime != 0)
                 {
                     Thread.Sleep(WaitingTime.WaitingLessTimeProperty);
+                    waitingTime--;
                 }
 
-                PutOnTheTable();
-            }
+                philosopher.Chopsticks.Remove(this);
 
-        }
-        public void PutOnTheTable()
-        {
-            _rightPhilosopher.Chopsticks.Remove(this);
+                Console.WriteLine(StringsForFirstStrategy.ChopstickOnTheTable, Name);
 
-            Console.WriteLine(StringsForFirstStrategy.ChopstickOnTheTable, Name);
-
-            _semaphore.Release();
-        }
-        private void GoToLeftPhilosopher()
-        {
-            if (_leftPhilosopher.Chopsticks.Count() != 2)
-            {
-                _semaphore.WaitOne();
-
-                Console.WriteLine(StringsForFirstStrategy.PhilosopherHasChopstickInLeftHand, Name, _leftPhilosopher.Name);
-
-                _leftPhilosopher.Chopsticks.Add(this);
-
-                while (!_leftPhilosopher.Eat())
-                {
-                    Thread.Sleep(WaitingTime.WaitingLessTimeProperty);
-                }
-
-                PutOnTheTable();
+                _semaphore.Release();
             }
         }
+
     }
 }

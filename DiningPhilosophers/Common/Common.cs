@@ -19,6 +19,7 @@ namespace DiningPhilosophers.Common
         public static readonly string NumberOfPhilosophers = "\n_______________________\nHow many philosophers do you want to have?";
         public static readonly string NumberOfEatingTimes = "How many times do you want a philosopher to be able to eat?";
         public static readonly string NumberOfUses = "How many times do you want a chopstick to be used?";
+        public static readonly string WaitingTime = "How long do you want the chopstick to wait for the philosopher to eat?";
 
     }
 }
