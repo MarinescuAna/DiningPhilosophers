@@ -46,7 +46,7 @@ namespace DiningPhilosophers.Implementation.FirstStrategy
             {
                 _semaphore.WaitOne();
 
-                Console.WriteLine(StringsForFirstStrategy.PhilosopherHasChopstickInRightHand, Name, philosopher.Name);
+                Console.WriteLine(StringsForFirstStrategy.PhilosopherHasChopstickInRightHand, Name, philosopher.Name,_counter);
 
                 philosopher.Chopsticks.Add(this);
 
@@ -59,7 +59,7 @@ namespace DiningPhilosophers.Implementation.FirstStrategy
 
                 philosopher.Chopsticks.Remove(this);
 
-                Console.WriteLine(StringsForFirstStrategy.ChopstickOnTheTable, Name);
+                Console.WriteLine(StringsForFirstStrategy.ChopstickOnTheTable, Name, _counter);
 
                 _semaphore.Release();
             }
