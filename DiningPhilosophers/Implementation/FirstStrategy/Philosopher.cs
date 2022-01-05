@@ -18,7 +18,7 @@ namespace DiningPhilosophers.Implementation.FirstStrategy
             Name = string.Format(Constants.Philosopher, index);
         }
 
-        public bool Eat()
+        public bool EatAndThink()
         {
             if (Chopsticks.Count() == 2)
             {

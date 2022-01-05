@@ -51,7 +51,7 @@ namespace DiningPhilosophers.Implementation.FirstStrategy
                 philosopher.Chopsticks.Add(this);
 
                 var waitingTime = _waitingTime;
-                while (!philosopher.Eat() && waitingTime != 0)
+                while (!philosopher.EatAndThink() && waitingTime != 0)
                 {
                     Thread.Sleep(WaitingTime.WaitingLessTimeProperty);
                     waitingTime--;
