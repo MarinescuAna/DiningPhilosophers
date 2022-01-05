@@ -28,10 +28,6 @@ namespace DiningPhilosophers.Implementation.FirstStrategy
                     Console.WriteLine(StringsForFirstStrategy.PhilosopherIsEating, Name, Chopsticks[0].Name, Chopsticks[1].Name);
 
                     Thread.Sleep(WaitingTime.WaitingTimeProperty);
-
-                    Console.WriteLine(StringsForFirstStrategy.PhilosopherIsBackToThinking, Name);
-
-                    Thread.Sleep(WaitingTime.WaitingTimeProperty);
                 }
 
                 return true;
@@ -39,6 +35,16 @@ namespace DiningPhilosophers.Implementation.FirstStrategy
 
             _isEating = false;
             return false;
+        }
+
+        public void TryToThink()
+        {
+            if (Chopsticks.Count() == 0)
+            {
+                Console.WriteLine(StringsForFirstStrategy.PhilosopherIsBackToThinking, Name);
+
+                Thread.Sleep(WaitingTime.WaitingTimeProperty);
+            }
         }
     }
 

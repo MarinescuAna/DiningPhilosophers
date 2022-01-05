@@ -62,6 +62,8 @@ namespace DiningPhilosophers.Implementation.FirstStrategy
                 Console.WriteLine(StringsForFirstStrategy.ChopstickOnTheTable, Name, _counter);
 
                 _semaphore.Release();
+
+                philosopher.TryToThink();
             }
         }
 
