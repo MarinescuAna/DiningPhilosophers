@@ -78,7 +78,7 @@ namespace DiningPhilosophers.Implementation.SecondStrategy
                 if (Monitor.TryEnter(RightChopstick))
                 {
                     watch.Stop();
-                    Console.WriteLine(Utility.PickUpChopstick,_name,RightChopstick.Name, watch.ElapsedMilliseconds);
+                    Console.WriteLine(Utility.PickUpChopstickWithTime, _name,RightChopstick.Name, watch.ElapsedMilliseconds);
 
                     // Both chopsticks acquired, its now time to eat
                     return true;

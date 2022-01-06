@@ -12,6 +12,7 @@ namespace DiningPhilosophers.Implementation.SecondStrategy
     public static class Utility
     {
         public static readonly string PickUpChopstick= "{0} picks up {1}.";
+        public static readonly string PickUpChopstickWithTime= "{0} picks up {1}. [{2}ms]";
         public static readonly string PutDownChopstick= "{0} puts down {1}.";
         public static readonly string PhilosopherEats= "{0} eats. [{1} times left]";
         public static readonly string PhilosopherThink= "{0} is thinking.";
