@@ -2,6 +2,7 @@
 using DiningPhilosophers.Common;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 
@@ -14,20 +15,16 @@ namespace DiningPhilosophers.Implementation.SecondStrategy
         public override void Main()
         {
             var philosophers = new List<Philosopher>(_max);
-            for (int i = 0; i < _max; i++)
-            {
-                philosophers.Add(new Philosopher(philosophers,i,_maxEatingTimes));
-            }
 
+            Enumerable.Range(0, _max).ToList().ForEach(i => {
+                philosophers.Add(new Philosopher(philosophers, i, _maxEatingTimes));
+            });
+            
             philosophers.ForEach(philosopher => {
-                // Assign left chopstick
                 philosopher.LeftChopstick = philosopher.LeftPhilosopher.RightChopstick ?? new Chopstick();
-
-                // Assign right chopstick
                 philosopher.RightChopstick = philosopher.RightPhilosopher.LeftChopstick ?? new Chopstick();
             });
 
-            // Spawn threads for each philosopher's eating cycle
             var philosopherThreads = new List<Thread>();
             foreach (var philosopher in philosophers)
             {

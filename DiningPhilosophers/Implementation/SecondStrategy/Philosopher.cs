@@ -48,17 +48,14 @@ namespace DiningPhilosophers.Implementation.SecondStrategy
 
         public void EatAll()
         {
-            // Cycle through thinking and eating until done eating.
             while (_timesEaten < _timesToEat)
             {
                 Think();
 
                 if (PickUp())
                 {
-                    // Chopsticks acquired, eat up
                     Eat();
 
-                    // Release chopsticks
                     PutDownLeft();
                     PutDownRight();
                 }
@@ -68,32 +65,28 @@ namespace DiningPhilosophers.Implementation.SecondStrategy
 
         private bool PickUp()
         {
-            // Try to pick up the left chopstick
             if (Monitor.TryEnter(LeftChopstick))
             {
                 var watch = System.Diagnostics.Stopwatch.StartNew();
 
                 Console.WriteLine(Utility.PickUpChopstick,_name,LeftChopstick.Name);
-                // Now try to pick up the right
+
                 if (Monitor.TryEnter(RightChopstick))
                 {
                     watch.Stop();
                     Console.WriteLine(Utility.PickUpChopstickWithTime, _name,RightChopstick.Name, watch.ElapsedMilliseconds);
 
-                    // Both chopsticks acquired, its now time to eat
                     return true;
                 }
                 else
                 {
-                    // Could not get the right chopstick, so put down the left
                     PutDownLeft();
                 }
 
                 watch.Stop();
             }
 
-            // Could not acquire chopsticks, try again
-            return false;
+             return false;
         }
 
         private void Eat()

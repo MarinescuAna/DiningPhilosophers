@@ -38,7 +38,7 @@ namespace DiningPhilosophers.Implementation.FirstStrategy
                 index => _chopsticks.Add(
                     new Chopstick(
                         index,
-                        index == 0 ? _philosophers[_max - 1] : _philosophers[index - 1],
+                        _philosophers[index],
                         index == _max - 1 ? _philosophers[0] : _philosophers[index + 1],
                         _numberOfUses,
                         _waitingTime
